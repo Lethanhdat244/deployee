@@ -14,7 +14,7 @@
 	<name>Accommodation_management_booking</name>
 	<description>Accommodation management Dormitory room reservations</description>
 	<properties>
-		<java.version>22</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
