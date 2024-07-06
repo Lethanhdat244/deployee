@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/homepage_user/images/icons/favicon.png"/>
+    <title>Student Payment List</title>
+    <!-- Favicon -->
+    <!--    <link rel="shortcut icon" href="/static/admin_homepage/img/svg/Logo.svg" type="image/x-icon">-->
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/static/admin_homepage/css/style.min.css">
+
+    <link rel="stylesheet" href="/static/admin_homepage/css/style.css">
+    <style>
+        .pagination-wrapper {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .pagination {
+            display: inline-flex;
+            padding-left: 0;
+            list-style: none;
+            border-radius: 0.25rem;
+        }
+
+        .pagination .page-item {
+            display: inline;
+        }
+
+        .pagination .page-link {
+            position: relative;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin-left: -1px;
+            line-height: 1.25;
+            color: #007bff;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+
+        .pagination .page-item.active .page-link {
+            z-index: 1;
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('sortDropdown').addEventListener('change', function () {
+                const selectedValue = this.value;
+                const [sortField, sortDirection] = selectedValue.split(',');
+
+                const params = new URLSearchParams(window.location.search);
+                params.set('sort', sortField + ',' + sortDirection);
+
+                window.location.href = window.location.pathname + '?' + params.toString();
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const sortDropdown = document.getElementById('sortDropdown');
+            const params = new URLSearchParams(window.location.search);
+            let storedSort = params.get('sort');
+
+            if (!storedSort) {
+                const defaultSort = 'paymentDate,desc';
+                storedSort = defaultSort;
+                params.set('sort', defaultSort);
+                window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
+            }
+
+            sortDropdown.value = storedSort;
+
+            sortDropdown.addEventListener('change', function () {
+                const selectedSort = this.value;
+                params.set('sort', selectedSort);
+                window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const A = document.getElementById('menu-payment');
+            const B = document.getElementById('menu-payment-request');
+
+            A.addEventListener('click', function () {
+                if (A.classList.contains('active')) {
+                    A.classList.remove('active');
+                    B.classList.add('active');
+                } else {
+                    A.classList.add('active');
+                    B.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+<div class="layer"></div>
+<!-- ! Body -->
+<div class="page-flex">
+    <!-- ! Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-start">
+            <div class="sidebar-head">
+                <a th:href="@{/fpt-dorm/admin/home}" class="logo-wrapper" title="Home">
+                    <span class="sr-only">Home</span>
+                    <span class="icon logo" aria-hidden="true"></span>
+                    <div class="logo-text">
+                        <span class="logo-title">FPT Dorm</span>
+                        <span class="logo-subtitle">ADMIN</span>
+                    </div>
+
+                </a>
+                <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
+                    <span class="sr-only">Toggle menu</span>
+                    <span class="icon menu-toggle" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="sidebar-body">
+                <ul class="sidebar-body-menu">
+                    <li>
+                        <a th:href="@{/fpt-dorm/admin/home}"><span class="icon home" aria-hidden="true"></span>Dashboard</a>
+                    </li>
+                    <li>
+                        <a id="menu-student" class="show-cat-btn">
+                            <span class="icon folder" aria-hidden="true"></span>Student
+                            <span class="category__btn transparent-btn" title="Open list">
+                                <span class="sr-only">Open list</span>
+                                <span class="icon arrow-down" aria-hidden="true"></span>
+                            </span>
+                        </a>
+                        <ul class="cat-sub-menu">
+                            <li>
+                                <a id="menu-all-students" class="" th:href="@{/fpt-dorm/admin/student/all-student}">All
+                                    Students</a>
+                            </li>
+                            <li>
+                                <a id="menu-add-student" class="" th:href="@{/fpt-dorm/admin/student/add}">Add new
+                                    student</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="show-cat-btn">
+                            <span class="icon folder" aria-hidden="true"></span>Room
+                            <span class="category__btn transparent-btn" title="Open list">
+                            <span class="sr-only">Open list</span>
+                            <span class="icon arrow-down" aria-hidden="true"></span>
+                        </span>
+                        </a>
+                        <ul class="cat-sub-menu">
+                            <li>
+                                <a th:href="@{admin_list_room}">All Rooms</a>
+                            </li>
+                            <li>
+                                <a th:href="@{admin_add_new_room}">Add new room</a>
+                            </li>
+                            <li>
+                                <a th:href="@{admin_add_new_type_room}">Add new room type</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a class="show-cat-btn">
+                            <span class="icon folder" aria-hidden="true"></span>News
+                            <span class="category__btn transparent-btn" title="Open list">
+                            <span class="sr-only">Open list</span>
+                            <span class="icon arrow-down" aria-hidden="true"></span>
+                        </span>
+                        </a>
+                        <ul class="cat-sub-menu">
+                            <li>
+                                <a th:href="@{/fpt-dorm/admin/view-news}">View News</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/fpt-dorm/admin/add-news}">Add news</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a id="menu-payment" class="show-cat-btn active">
+                            <span class="icon folder" aria-hidden="true"></span>Payment
+                            <span class="category__btn transparent-btn" title="Open list">
+                            <span class="sr-only">Open list</span>
+                            <span class="icon arrow-down" aria-hidden="true"></span>
+                        </span>
+                        </a>
+                        <ul class="cat-sub-menu">
+                            <li>
+                                <a id="menu-all-payments" class="" th:href="@{/fpt-dorm/admin/all-payment}">All
+                                    Payments</a>
+                            </li>
+                            <li>
+                                <a id="menu-payment-request" class="" th:href="@{/fpt-dorm/admin/payment-request}">Payment
+                                    Request</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a th:href="@{admin/admin_chart}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Chart
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{admin/admin_booking_list}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Booking requirement
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{admin/admin_service_list}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Service requirement
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{admin/admin_list_feedback}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Feedback
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{admin/admin_list_complaint}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Complaint
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/fpt-dorm/admin/admin_Resident_History/list}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Resident History
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="sidebar-footer">
+            <a href="#" class="sidebar-user">
+            <span class="sidebar-user-img">
+                <picture><source srcset="/static/admin_homepage/img/avatar/avatar-illustrated-01.webp"
+                                 type="image/webp"><img
+                        src="/static/admin_homepage/img/avatar/avatar-illustrated-01.png" alt="User name"></picture>
+            </span>
+                <div class="sidebar-user-info">
+                    <span class="sidebar-user__title">AI</span>
+                    <span class="sidebar-user__subtitle">Support manager</span>
+                </div>
+            </a>
+        </div>
+    </aside>
+    <div class="main-wrapper">
+        <!-- ! Main nav -->
+        <nav class="main-nav--bg">
+            <div class="container main-nav">
+                <div class="main-nav-start">
+                </div>
+                <div class="main-nav-end">
+                    <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
+                        <span class="sr-only">Toggle menu</span>
+                        <span class="icon menu-toggle--gray" aria-hidden="true"></span>
+                    </button>
+                    <button class="theme-switcher gray-circle-btn" type="button" title="Switch theme">
+                        <span class="sr-only">Switch theme</span>
+                        <i class="sun-icon" data-feather="sun" aria-hidden="true"></i>
+                        <i class="moon-icon" data-feather="moon" aria-hidden="true"></i>
+                    </button>
+                    <div class="notification-wrapper">
+                        <button class="gray-circle-btn dropdown-btn" title="To messages" type="button">
+                            <span class="sr-only">To messages</span>
+                            <span class="icon notification active" aria-hidden="true"></span>
+                        </button>
+                        <ul class="users-item-dropdown notification-dropdown dropdown">
+                            <li>
+                                <a href="#">
+                                    <div class="notification-dropdown-icon info">
+                                        <i data-feather="check"></i>
+                                    </div>
+                                    <div class="notification-dropdown-text">
+                                        <span class="notification-dropdown__title">System just updated</span>
+                                        <span class="notification-dropdown__subtitle">The system has been successfully upgraded. Read more here.</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="notification-dropdown-icon danger">
+                                        <i data-feather="info" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="notification-dropdown-text">
+                                        <span class="notification-dropdown__title">The cache is full!</span>
+                                        <span class="notification-dropdown__subtitle">Unnecessary caches take up a lot of memory space and interfere ...</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="notification-dropdown-icon info">
+                                        <i data-feather="check" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="notification-dropdown-text">
+                                        <span class="notification-dropdown__title">New Subscriber here!</span>
+                                        <span class="notification-dropdown__subtitle">A new subscriber has subscribed.</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="link-to-page" href="#">Go to Notifications page</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-user-wrapper">
+                        <button href="#" class="nav-user-btn dropdown-btn" title="My profile" type="button">
+                            <span class="sr-only">My profile</span>
+                            <span class="nav-user-img">
+            <picture><source srcset="/static/admin_homepage/img/avatar/avatar-illustrated-02.webp"
+                             type="image/webp"><img src="/static/admin_homepage/img/avatar/avatar-illustrated-02.png"
+                                                    alt="User name"></picture>
+          </span>
+                        </button>
+                        <ul class="users-item-dropdown nav-user-dropdown dropdown">
+                            <li><a th:href="@{/fpt-dorm/admin/profile(email=${email})}">Profile</a></li>
+                            <li><a th:href="@{/fpt-dorm/user/news}">Home User</a></li>
+                            <!--                            <li><a th:href="@{/fpt-dorm/employee/home}">Home Employee</a></li>-->
+                            <li><a class="danger" th:href="@{/fpt-dorm/logout}">
+                                <i data-feather="log-out" aria-hidden="true"></i>
+                                <span>Log out</span>
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- ! Main -->
+        <main class="main users chart-page" id="skip-target">
+            <div class="container">
+                <h2 class="main-title">Payment Request List</h2>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form th:action="@{/fpt-dorm/admin/payment-request/search}" method="get" class="search-form">
+                            <input type="text" name="keyword" th:value="${keyword}" placeholder="Search..."
+                                   class="search-box"/>
+                            <select name="category" class="search-dropdown">
+                                <option value="" th:text="'--Select--'"
+                                        th:selected="${selectedCategory == null}"></option>
+                                <option value="ID" th:text="'ID'" th:selected="${selectedCategory == 'ID'}"></option>
+                                <option value="Date" th:text="'Date'"
+                                        th:selected="${selectedCategory == 'Date'}"></option>
+                            </select>
+                            <button class="btn btn-lg search-btn center-block" type="submit">Search</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-4">
+                        <div style="text-align: right;">
+                            Sort by:
+                            <select id="sortDropdown" class="sort-dropdown">
+                                <option value="paymentId,asc">ID Ascending</option>
+                                <option value="paymentId,desc">ID Descending</option>
+                                <option value="paymentDate,asc">Oldest</option>
+                                <option value="paymentDate,desc">Newest</option>
+                                <option value="totalPrice,asc">Amount Ascending</option>
+                                <option value="totalPrice,desc">Amount Descending</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="canvas-wrapper">
+                            <div class="users-table">
+                                <table class="posts-table">
+                                    <thead>
+                                    <tr class="users-table-info">
+                                        <th>Payment ID</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="payment : ${paymentPage.content}">
+                                        <td th:text="${payment.paymentId}"></td>
+                                        <td th:text="${payment.paymentDate.toString().substring(0, 10)}"></td>
+                                        <td th:text="${payment.totalPrice}"></td>
+                                        <td>
+                                            <span th:if="${#strings.equalsIgnoreCase(payment.status, 'Pending')}"
+                                                  class="badge-pending" th:text="${payment.status}"></span>
+                                            <span th:if="${#strings.equalsIgnoreCase(payment.status, 'Confirmed')}"
+                                                  class="badge-success" th:text="${payment.status}"></span>
+                                            <span th:if="${#strings.equalsIgnoreCase(payment.status, 'Canceled')}"
+                                                  class="badge-trashed" th:text="${payment.status}"></span>
+                                        </td>
+
+                                        <td>
+                                            <a class="btn btn-primary"
+                                               th:href="@{/fpt-dorm/admin/payment-request/id={id}(id=${payment.paymentId})}"
+                                               role="button" style="color: #0061f7;">Detail</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <h3 th:if="${paymentPage.totalPages == 0}">
+                                    No data recorded
+                                </h3>
+                            </div>
+                            <div class="pagination-wrapper">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination">
+                                        <li class="page-item" th:classappend="${paymentPage.hasPrevious()} ? '' : 'disabled'">
+                                            <a class="page-link"
+                                               th:href="@{|?page=${paymentPage.number - 1}&keyword=${keyword}&category=${selectedCategory}&sort=${sort}|}"
+                                               aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item"
+                                            th:each="i : ${paymentPage.totalPages > 0 ? #numbers.sequence(0, paymentPage.totalPages - 1) : {0}}"
+                                            th:classappend="${paymentPage.number == i} ? 'active'">
+                                            <a class="page-link"
+                                               th:href="@{|?page=${i}&keyword=${keyword}&category=${selectedCategory}&sort=${sort}|}"
+                                               th:text="${i + 1}">1</a>
+                                        </li>
+                                        <li class="page-item" th:classappend="${paymentPage.hasNext()} ? '' : 'disabled'">
+                                            <a class="page-link"
+                                               th:href="@{|?page=${paymentPage.number + 1}&keyword=${keyword}&category=${selectedCategory}&sort=${sort}|}"
+                                               aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- ! Footer -->
+        <footer class="footer">
+            <div class="container footer--flex">
+                <div class="footer-start">
+                    <p>2024 © FPT Dorm - <a href="/fpt-dorm/home" target="_blank"
+                                            rel="noopener noreferrer">FPT Dorm</a></p>
+                </div>
+                <ul class="footer-end">
+                    <li><a href="/fpt-dorm/home/about">About</a></li>
+                    <li><a href="/fpt-dorm/home/contact">Contact</a></li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<div id="confirmCancelModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeConfirmCancelModal()">&times;</span>
+        <p>Are you sure you want to cancel this payment?</p>
+        <div class="modal-actions">
+            <button id="confirmCancelBtn" class="btn danger-btn" onclick="cancelPayment()">Yes</button>
+            <button class="btn primary-white-btn" style="color: #0e0e0ebd;" onclick="closeConfirmCancelModal()">No
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="confirmConfirmModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeConfirmConfirmModal()">&times;</span>
+        <p>Are you sure you want to confirm this payment?</p><br>
+        <div id="confirmDetails"></div>
+        <div id="refundDetails" style="display: none;">
+            <label for="refundAmount">Refund Amount:</label>
+            <input type="number" id="refundAmount" name="refundAmount" value="" readonly required>
+            <br><br>
+            <label for="refundDate">Refund Date:</label>
+            <input type="date" id="refundDate" name="refundDate" value="" required>
+            <br>
+        </div>
+        <div class="modal-actions">
+            <button id="confirmBtn" class="btn primary-default-btn" onclick="confirmPayment()">Confirm</button>
+            <button class="btn secondary-default-btn" onclick="closeConfirmConfirmModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentBookingId = null;
+    let totalPrice = 0;
+    let amountPaid = 0;
+
+    // Function to show the cancel confirmation modal
+    function showCancelConfirmModal(bookingId) {
+        currentBookingId = bookingId;
+        const modal = document.getElementById('confirmCancelModal');
+        modal.style.display = 'block';
+    }
+
+    // Function to handle canceling payment
+    function cancelPayment() {
+        if (!currentBookingId) return;
+
+        fetch(`/fpt-dorm/admin/payment-request/cancel/id=${currentBookingId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Canceled successfully');
+                    location.reload(); // Reload the page to reflect changes
+                } else {
+                    alert('Failed to cancel');
+                }
+            })
+            .catch(error => {
+                console.error('Error canceling payment:', error);
+                alert('An error occurred while canceling');
+            });
+
+        closeConfirmCancelModal(); // Close the modal after the action
+    }
+
+    // Function to close the cancel confirmation modal
+    function closeConfirmCancelModal() {
+        const modal = document.getElementById('confirmCancelModal');
+        modal.style.display = 'none';
+        currentBookingId = null;
+    }
+
+    function formatDate(date) {
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // January is 0
+        const year = date.getFullYear();
+        return `${year}-${month}-${day}`;
+    }
+
+    function showConfirmConfirmModal(bookingId, tp, ap) {
+        currentBookingId = bookingId;
+        totalPrice = parseFloat(tp);
+        amountPaid = parseFloat(ap);
+        const modal = document.getElementById('confirmConfirmModal');
+        const confirmDetails = document.getElementById('confirmDetails');
+        const refundDetails = document.getElementById('refundDetails');
+
+        confirmDetails.innerHTML = `
+            <p>Total Price: ${totalPrice}</p><br>
+            <p>Amount Paid: ${amountPaid}</p><br>
+        `;
+
+        if (totalPrice > amountPaid) {
+            confirmDetails.innerHTML += `<p style="color: red;">Cannot confirm: Total Price exceeds Amount Paid</p>`;
+            refundDetails.style.display = 'none';
+            document.getElementById('confirmBtn').disabled = true;
+        } else if (totalPrice < amountPaid) {
+            refundDetails.style.display = 'block';
+            document.getElementById('refundAmount').value = (amountPaid - totalPrice).toFixed(2);
+
+            const now = new Date();
+            const minDate = formatDate(now);
+            now.setDate(now.getDate() + 3);
+            const defaultDate = formatDate(now);
+            now.setDate(now.getDate() + 4); // Move 4 more days ahead to set maxDate
+            const maxDate = formatDate(now);
+
+            document.getElementById('refundDate').value = defaultDate;
+            document.getElementById('refundDate').min = minDate;
+            document.getElementById('refundDate').max = maxDate;
+
+            document.getElementById('confirmBtn').disabled = false;
+        } else {
+            refundDetails.style.display = 'none';
+            document.getElementById('confirmBtn').disabled = false;
+        }
+
+        modal.style.display = 'block';
+    }
+
+    // Function to handle confirming payment
+    function confirmPayment() {
+        if (!currentBookingId) return;
+
+        let refundAmount = 0;
+        let refundDate = null;
+
+        if (totalPrice < amountPaid) {
+            refundAmount = parseFloat(document.getElementById('refundAmount').value);
+            refundDate = document.getElementById('refundDate').value;
+            if (!refundAmount || !refundDate) {
+                alert('Refunds can be postponed for up to 7 days. Please enter correctly!');
+                return;
+            }
+
+            const now = new Date();
+            const selectedRefundDate = new Date(refundDate);
+            const maxRefundDate = new Date();
+            maxRefundDate.setDate(now.getDate() + 7);
+
+            if (selectedRefundDate < now || selectedRefundDate > maxRefundDate) {
+                alert('Refund date must be between today and 7 days from now.');
+                return;
+            }
+        }
+
+        const data = {
+            bookingId: currentBookingId,
+            refundAmount: refundAmount,
+            refundDate: refundDate
+        };
+
+        fetch('/fpt-dorm/admin/payment-request/confirm', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Payment confirmed successfully');
+                    location.reload(); // Reload the page to reflect changes
+                } else {
+                    alert('Failed to confirm payment');
+                }
+            })
+            .catch(error => {
+                console.error('Error confirming payment:', error);
+                alert('An error occurred while confirming payment');
+            });
+
+        closeConfirmConfirmModal(); // Close the modal after the action
+    }
+
+    // Function to close the confirm confirmation modal
+    function closeConfirmConfirmModal() {
+        const modal = document.getElementById('confirmConfirmModal');
+        modal.style.display = 'none';
+        currentBookingId = null;
+        totalPrice = 0;
+        amountPaid = 0;
+        document.getElementById('refundAmount').value = '';
+        document.getElementById('refundDate').value = '';
+    }
+
+    // Close the modal if user clicks outside of it (for both modals)
+    window.onclick = function (event) {
+        if (event.target === document.getElementById('confirmCancelModal')) {
+            closeConfirmCancelModal();
+        } else if (event.target === document.getElementById('confirmConfirmModal')) {
+            closeConfirmConfirmModal();
+        }
+    };
+
+</script>
+
+
+<!-- Chart library -->
+<script src="/static/admin_homepage/plugins/chart.min.js"></script>
+<!-- Icons library -->
+<script src="/static/admin_homepage/plugins/feather.min.js"></script>
+<!-- Custom scripts -->
+<script src="/static/admin_homepage/js/script.js"></script>
+</body>
+
+</html>

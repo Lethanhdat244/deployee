@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <body>
+        <h1>Paypal Payment with Spring Boot</h1>
+        <form method="post" th:action="@{/pay}">
+            <input type="text" name="price" value="5">
+            <button type="submit">Pay</button>
+        </form>
+    </body>
+</html>

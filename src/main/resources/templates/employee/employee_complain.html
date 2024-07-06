@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complain | Employee</title>
+    <!-- Favicon -->
+    <!--    <link rel="shortcut icon" href="/static/admin_homepage/img/svg/Logo.svg" type="image/x-icon">-->
+    <link rel="" href="/homepage_user/images/icons/favicon.png"/>
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/static/admin_homepage/css/style.min.css">
+
+    <link rel="stylesheet" href="/static/admin_homepage/css/style.css">
+    <style>
+        .btn {
+            padding: 10px 20px;
+            margin: 30px 0px;
+            border-radius: 7px;
+            font-weight: 700;
+        }
+
+        .primary {
+            background: #2f49d1;
+            color: white;
+        }
+
+        .info {
+            color: #555555;
+            background-color: rgba(58, 72, 65, 0.1);
+            padding: 5px 15px;
+            border-radius: 15px;
+        }
+
+        .warning {
+            color: #ffb648;
+            background-color: rgba(255, 172, 50, .1);
+            padding: 5px 15px;
+            border-radius: 15px;
+        }
+
+        select {
+            width: 20%;
+            padding: 0.5em;
+            margin-top: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        select option {
+            padding: 0.5em;
+            margin-top: 0.5em;
+        }
+
+        .success {
+            color: green;
+            background-color: rgba(75, 222, 151, 0.1);
+            padding: 5px 15px;
+            border-radius: 15px;
+        }
+
+        .danger {
+            color: red;
+            background-color: rgba(222, 75, 126, 0.1);
+            padding: 5px 15px;
+            border-radius: 15px;
+        }
+
+        .pagination-wrapper {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .pagination {
+            display: inline-flex;
+            padding-left: 0;
+            list-style: none;
+            border-radius: 0.25rem;
+        }
+
+        .pagination .page-item {
+            display: inline;
+        }
+
+        .pagination .page-link {
+            position: relative;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin-left: -1px;
+            line-height: 1.25;
+            color: #007bff;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+
+        .pagination .page-item.active .page-link {
+            z-index: 1;
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layer"></div>
+<!-- ! Body -->
+<div class="page-flex">
+    <!-- ! Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-start">
+            <div class="sidebar-head">
+                <a th:href="@{/fpt-dorm/employee/home}" class="logo-wrapper" title="Home">
+                    <span class="sr-only">Home</span>
+                    <span class="icon logo" aria-hidden="true"></span>
+                    <div class="logo-text">
+                        <span class="logo-title">Dormitory</span>
+                        <span class="logo-subtitle">Employee</span>
+                    </div>
+
+                </a>
+                <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
+                    <span class="sr-only">Toggle menu</span>
+                    <span class="icon menu-toggle" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="sidebar-body">
+                <ul class="sidebar-body-menu">
+                    <li>
+                        <a class=""><span class="icon home" aria-hidden="true"></span>Dashboard</a>
+                    </li>
+                    <li>
+                        <a class="show-cat-btn" href="#">
+                            <span class="icon folder" aria-hidden="true"></span>Student
+                            <span class="category__btn transparent-btn" title="Open list">
+                            <span class="sr-only">Open list</span>
+                            <span class="icon arrow-down" aria-hidden="true"></span>
+                        </span>
+                        </a>
+                        <ul class="cat-sub-menu">
+                            <li>
+                                <a id="menu-all-students" class="" th:href="@{/fpt-dorm/employee/student/all-student}">All
+                                    Students</a>
+                            </li>
+                            <li>
+                                <a id="menu-add-student" class="" th:href="@{/fpt-dorm/employee/student/add}">Add new
+                                    student</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="show-cat-btn" >
+                            <span class="icon folder" aria-hidden="true"></span>Room
+                            <span class="category__btn transparent-btn" title="Open list">
+                            <span class="sr-only">Open list</span>
+                            <span class="icon arrow-down" aria-hidden="true"></span>
+                        </span>
+                        </a>
+                        <ul class="cat-sub-menu">
+                            <li>
+                                <a th:href="@{admin_list_room}">All Rooms</a>
+                            </li>
+                            <li>
+                                <a th:href="@{admin_add_new_room}">Add new room</a>
+                            </li>
+                            <!--                            <li>-->
+                            <!--                                <a th:href="@{admin_add_new_type_room}">Add new room type</a>-->
+                            <!--                            </li>-->
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="show-cat-btn" >
+                            <span class="icon folder" aria-hidden="true"></span>News
+                            <span class="category__btn transparent-btn" title="Open list">
+                            <span class="sr-only">Open list</span>
+                            <span class="icon arrow-down" aria-hidden="true"></span>
+                        </span>
+                        </a>
+                        <ul class="cat-sub-menu">
+                            <li>
+                                <a th:href="@{/fpt-dorm/employee/view-news}">View News</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/fpt-dorm/employee/add-news}">Add news</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="show-cat-btn" href="#">
+                            <span class="icon folder" aria-hidden="true"></span>Payment
+                            <span class="category__btn transparent-btn" title="Open list">
+                            <span class="sr-only">Open list</span>
+                            <span class="icon arrow-down" aria-hidden="true"></span>
+                        </span>
+                        </a>
+                        <ul class="cat-sub-menu">
+                            <li>
+                                <a id="menu-all-payments" class="" th:href="@{/fpt-dorm/employee/all-payment}">All
+                                    Payments</a>
+                            </li>
+                            <li>
+                                <a id="menu-payment-request" class="" th:href="@{/fpt-dorm/employee/payment-request}">Payment
+                                    Request</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a th:href="@{admin/admin_booking_list}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Booking requirement
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{admin/admin_service_list}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Service requirement
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{admin/admin_list_feedback}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Feedback
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="active" th:href="@{/fpt-dorm/employee/complain}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Complain
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/fpt-dorm/employee/usage-service}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Usage Service
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/fpt-dorm/employee/notifications}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Notifications
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="sidebar-footer">
+            <a href="##" class="sidebar-user">
+            <span class="sidebar-user-img">
+                <picture><source srcset="/static/admin_homepage/img/avatar/avatar-illustrated-01.webp"
+                                 type="image/webp"><img
+                        src="/static/admin_homepage/img/avatar/avatar-illustrated-01.png" alt="User name"></picture>
+            </span>
+                <div class="sidebar-user-info">
+                    <span class="sidebar-user__title">AI</span>
+                    <span class="sidebar-user__subtitle">Support manager</span>
+                </div>
+            </a>
+        </div>
+    </aside>
+    <div class="main-wrapper">
+        <!-- ! Main nav -->
+        <nav class="main-nav--bg">
+            <div class="container main-nav">
+                <div class="main-nav-start">
+                </div>
+                <div class="main-nav-end">
+                    <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
+                        <span class="sr-only">Toggle menu</span>
+                        <span class="icon menu-toggle--gray" aria-hidden="true"></span>
+                    </button>
+                    <button class="theme-switcher gray-circle-btn" type="button" title="Switch theme">
+                        <span class="sr-only">Switch theme</span>
+                        <i class="sun-icon" data-feather="sun" aria-hidden="true"></i>
+                        <i class="moon-icon" data-feather="moon" aria-hidden="true"></i>
+                    </button>
+                    <div class="notification-wrapper">
+                        <button class="gray-circle-btn dropdown-btn" title="To messages" type="button">
+                            <span class="sr-only">To messages</span>
+                            <span class="icon notification active" aria-hidden="true"></span>
+                        </button>
+                        <ul class="users-item-dropdown notification-dropdown dropdown">
+                            <li>
+                                <a href="##">
+                                    <div class="notification-dropdown-icon info">
+                                        <i data-feather="check"></i>
+                                    </div>
+                                    <div class="notification-dropdown-text">
+                                        <span class="notification-dropdown__title">System just updated</span>
+                                        <span class="notification-dropdown__subtitle">The system has been successfully upgraded. Read more here.</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="##">
+                                    <div class="notification-dropdown-icon danger">
+                                        <i data-feather="info" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="notification-dropdown-text">
+                                        <span class="notification-dropdown__title">The cache is full!</span>
+                                        <span class="notification-dropdown__subtitle">Unnecessary caches take up a lot of memory space and interfere ...</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="##">
+                                    <div class="notification-dropdown-icon info">
+                                        <i data-feather="check" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="notification-dropdown-text">
+                                        <span class="notification-dropdown__title">New Subscriber here!</span>
+                                        <span class="notification-dropdown__subtitle">A new subscriber has subscribed.</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="link-to-page" href="##">Go to Notifications page</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-user-wrapper">
+                        <button href="##" class="nav-user-btn dropdown-btn" title="My profile" type="button">
+                            <span class="sr-only">My profile</span>
+                            <span class="nav-user-img">
+            <picture><source srcset="/static/admin_homepage/img/avatar/avatar-illustrated-02.webp"
+                             type="image/webp"><img src="/static/admin_homepage/img/avatar/avatar-illustrated-02.png"
+                                                    alt="User name"></picture>
+          </span>
+                        </button>
+                        <ul class="users-item-dropdown nav-user-dropdown dropdown">
+                            <li><a th:href="@{/fpt-dorm/employee/profile(email=${email})}">Profile</a></li>
+                            <li><a th:href="@{/fpt-dorm/user/news}">Home User</a></li>
+                            <li><a class="danger" th:href="@{/fpt-dorm/logout}">
+                                <i data-feather="log-out" aria-hidden="true"></i>
+                                <span>Log out</span>
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- ! Main -->
+        <main class="main users chart-page" id="skip-target">
+            <div class="container">
+                <h2 class="main-title">Complain List</h2>
+                <div class="canvas-wrapper" style="margin-bottom: 20px">
+                    <form th:action="@{/fpt-dorm/employee/complain}" th:method="get">
+                        <select class="" id="status" name="status">
+                            <option class="" value="" th:selected="${statusForm == null}">All Type</option>
+                            <option class="info" value="WAITING"
+                                    th:selected="${statusForm == T(com.accommodation_management_booking.entity.Complaint.Status).WAITING}">
+                                Waiting
+                            </option>
+                            <option class="warning" value="INPROGRESS"
+                                    th:selected="${statusForm == T(com.accommodation_management_booking.entity.Complaint.Status).INPROGRESS}">
+                                In Progress
+                            </option>
+                            <option class="success" value="DONE"
+                                    th:selected="${statusForm == T(com.accommodation_management_booking.entity.Complaint.Status).DONE}">
+                                Done
+                            </option>
+                            <option class="danger" value="REJECT"
+                                    th:selected="${statusForm == T(com.accommodation_management_booking.entity.Complaint.Status).REJECT}">
+                                Reject
+                            </option>
+                        </select>
+                        <button class="btn primary" type="submit">Filter</button>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="canvas-wrapper">
+                            <div class="users-table table-wrapper">
+                                <table class="posts-table">
+                                    <thead>
+                                    <tr class="users-table-info">
+                                        <th>No.</th>
+                                        <th style="width: 700px">Title</th>
+                                        <th>Sent At</th>
+                                        <th>Status</th>
+                                        <th style="width: 150px">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody th:if="${message == null}">
+                                    <tr th:each="complain : ${complaintDTOList}">
+                                        <td th:text="${complain.complaintId}"></td>
+                                        <td th:text="${complain.title}"></td>
+                                        <td th:text="${complain.getFormattedCreatedAt()}"></td>
+                                        <td>
+                                                <span th:text="${complain.status.getDisplayName()}"
+                                                      th:class="${complain.status == T(com.accommodation_management_booking.entity.Complaint.Status).WAITING ? 'info' :
+                                                           (complain.status == T(com.accommodation_management_booking.entity.Complaint.Status).INPROGRESS ? 'warning' :
+                                                           (complain.status == T(com.accommodation_management_booking.entity.Complaint.Status).DONE ? 'success' :
+                                                           (complain.status == T(com.accommodation_management_booking.entity.Complaint.Status).REJECT ? 'danger' : '')))}">
+                                                </span>
+                                        </td>
+                                        <td>
+                                            <a class="btn primary"
+                                               th:href="@{/fpt-dorm/employee/complain/execute/{id}(id=${complain.complaintId})}">Execute</a>
+                                            <!--                                                <span class="p-relative">-->
+                                            <!--                                                    <button class="dropdown-btn transparent-btn" type="button"-->
+                                            <!--                                                            title="More info">-->
+                                            <!--                                                      <div class="sr-only">More info</div>-->
+                                            <!--                                                      <i data-feather="more-horizontal" aria-hidden="true"></i>-->
+                                            <!--                                                    </button>-->
+                                            <!--                                                    <ul class="users-item-dropdown dropdown">-->
+                                            <!--                                                      <li></li>-->
+                                            <!--                                                    </ul>-->
+                                            <!--                                                </span>-->
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tbody th:if="${message != null}">
+                                    <tr>
+                                        <td colspan="4" class="" style="text-align: center" th:text="${message}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pagination-wrapper">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <!--                                    <li class="page-item" th:classappend="${newsPage.hasPrevious()} ? 'enabled'">-->
+                                    <!--                                        <a class="page-link" th:href="@{/fpt-dorm/employee/view-news(page=${newsPage.number - 1}, size=${newsPage.size}, keyword=${keyword})}" aria-label="Previous">-->
+                                    <!--                                            <span aria-hidden="true">&laquo;</span>-->
+                                    <!--                                        </a>-->
+                                    <!--                                    </li>-->
+                                    <!--                                    <li class="page-item" th:each="i : ${#numbers.sequence(0, newsPage.totalPages - 1)}" th:classappend="${newsPage.number == i} ? 'active'">-->
+                                    <!--                                        <a class="page-link" th:href="@{/fpt-dorm/employee/view-news(page=${i}, size=${newsPage.size}, keyword=${keyword})}" th:text="${i + 1}">1</a>-->
+                                    <!--                                    </li>-->
+                                    <!--                                    <li class="page-item" th:classappend="${newsPage.hasNext()} ? 'enabled'">-->
+                                    <!--                                        <a class="page-link" th:href="@{/fpt-dorm/employee/view-news(page=${newsPage.number + 1}, size=${newsPage.size}, keyword=${keyword})}" aria-label="Next">-->
+                                    <!--                                            <span aria-hidden="true">&raquo;</span>-->
+                                    <!--                                        </a>-->
+                                    <!--                                    </li>-->
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- ! Footer -->
+        <footer class="footer">
+            <div class="container footer--flex">
+            </div>
+        </footer>
+    </div>
+</div>
+<!-- Chart library -->
+<script src="/static/admin_homepage/plugins/chart.min.js"></script>
+<!-- Icons library -->
+<script src="/static/admin_homepage/plugins/feather.min.js"></script>
+<!-- Custom scripts -->
+<script src="/static/admin_homepage/js/script.js"></script>
+</body>
+
+</html>

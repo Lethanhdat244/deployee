@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/homepage_user/images/icons/favicon.png"/>
+    <title>About Us</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/homepage_user/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/homepage_user/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom styles for this template -->
+    <link href="/static/homepage_user/css/style.css" rel="stylesheet">
+    <link href="/static/homepage_user/fonts/antonio-exotic/stylesheet.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/homepage_user/css/lightbox.min.css">
+    <link href="/static/homepage_user/css/responsive.css" rel="stylesheet">
+    <script src="/static/homepage_user/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/static/homepage_user/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/static/homepage_user/js/lightbox-plus-jquery.min.js" type="text/javascript"></script>
+    <script src="/static/homepage_user/js/instafeed.min.js" type="text/javascript"></script>
+    <script src="/static/homepage_user/js/custom.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="page">
+    <!---header top---->
+    <div class="top-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Additional contact or announcement info can go here -->
+                </div>
+                <div class="col-md-6">
+                    <div class="social-grid">
+                        <ul class="list-unstyled text-right">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--header--->
+    <header class="header-container">
+        <div class="container">
+            <div class="top-row">
+                <div class="row">
+                    <div class="col-md-2 col-sm-6 col-xs-6">
+                        <div id="logo">
+                            <a th:href="@{/fpt-dorm/home}"><span>FPT</span> Dorm</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 visible-sm">
+                        <div class="text-right">
+                            <a href="/fpt-dorm/user/news" class="book-now-btn">Book Now</a>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-12 col-xs-12 remove-padd">
+                        <nav class="navbar navbar-default">
+                            <div class="navbar-header page-scroll">
+                                <button data-target=".navbar-ex1-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div class="collapse navigation navbar-collapse navbar-ex1-collapse remove-space">
+                                <ul class="list-unstyled nav1 cl-effect-10">
+                                    <li><a data-hover="Home" th:href="@{/fpt-dorm/home}"><span>Home</span></a></li>
+                                    <li><a data-hover="About" class="active"><span>About</span></a></li>
+                                    <li><a data-hover="Rooms" th:href="@{/fpt-dorm/home/room}"><span>Rooms</span></a></li>
+                                    <li><a data-hover="Gallery" th:href="@{/fpt-dorm/home/gallery}"><span>Gallery</span></a></li>
+                                    <li><a data-hover="Dinning" th:href="@{/fpt-dorm/home/dinning}"><span>Dinning</span></a></li>
+                                    <li><a data-hover="Contact Us" th:href="@{/fpt-dorm/home/contact}"><span>Contact Us</span></a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12 hidden-sm">
+                        <div class="text-right">
+                            <a href="/fpt-dorm/user/news" class="book-now-btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--end-->
+    <section class="image-head-wrappers"
+             style="background-image: url('/static/homepage_user/images/banner_about.png');">
+        <div class="inner-wrapper">
+            <h1>About Us</h1>
+        </div>
+    </section>
+    <div class="clearfix"></div>
+
+    <section class="about-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 about-left">
+                    <p>FPT University <label>Dormitory</label></p>
+                </div>
+                <div class="col-md-7 about-right">
+                    <h3>Welcome to FPT University Dormitory Booking</h3>
+                    <p>At FPT University, we strive to provide a comfortable and convenient living experience for our students. Our dormitories are designed to meet the needs of our diverse student population, offering a variety of room options and modern amenities.</p>
+                    <ul class="list-unstyled list-inline">
+                        <li>Spacious and well-furnished rooms</li>
+                        <li>24/7 security and surveillance</li>
+                        <li>High-speed internet connectivity</li>
+                        <li>Common areas for study and social activities</li>
+                        <li>On-site dining facilities</li>
+                        <li>Regular cleaning and maintenance services</li>
+                    </ul>
+                    <span>We are committed to ensuring that your stay at FPT University is as pleasant and productive as possible.</span>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </section>
+
+    <!---footer--->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-12 width-set-50">
+                    <div class="footer-details">
+                        <h4>Get in touch</h4>
+                        <ul class="list-unstyled footer-contact-list">
+                            <li>
+                                <i class="fa fa-map-marker fa-lg"></i>
+                                <p>Khu Giáo dục và Đào tạo – Khu Công nghệ cao Hòa Lạc – Km29 Đại lộ Thăng Long, Thạch Thất, TP. HN</p>
+                            </li>
+                            <li>
+                                <i class="fa fa-phone fa-lg"></i>
+                                <p><a href="tel:+84-24-7300-1866"> +84-24-7300-1866</a></p>
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope-o fa-lg"></i>
+                                <p><a href="mailto:dormbooking@fpt.edu.vn"> dormbooking@fpt.edu.vn</a></p>
+                            </li>
+                        </ul>
+                        <div class="footer-social-icon">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        </div>
+                        <div class="input-group" id="subscribe">
+                            <input type="text" class="form-control subscribe-box" value="" name="subscribe" placeholder="EMAIL ID">
+                            <span class="input-group-btn">
+                                        <button type="button" class="btn subscribe-button"><i class="fa fa-paper-plane fa-lg"></i></button>
+                                    </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 width-50 width-set-50">
+                    <div class="footer-details">
+                        <h4>Explore</h4>
+                        <ul class="list-unstyled footer-links">
+                            <li><a th:href="@{/fpt-dorm/home}">Home</a></li>
+                            <li class="active"><a>About</a></li>
+                            <li><a th:href="@{/fpt-dorm/home/room}">Rooms</a></li>
+                            <li><a th:href="@{/fpt-dorm/home/gallery}">Gallery</a></li>
+                            <li><a th:href="@{/fpt-dorm/home/dinning}">Dining</a></li>
+                            <li><a th:href="@{/fpt-dorm/home/contact}">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="footer-details">
+                        <h4>Now On Instagram</h4>
+                        <div class="row">
+                            <div class="instagram-images">
+                                <div id="instafeed"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright">
+                &copy; 2024 All rights reserved. Designed by <a href="http://localhost:8080/fpt-dorm/home" target="_blank">SWP391</a>.
+            </div>
+
+        </div>
+    </footer>
+
+    <!--back to top--->
+    <a style="display: none;" href="javascript:void(0);" class="scrollTop back-to-top" id="back-to-top">
+        <span><i aria-hidden="true" class="fa fa-angle-up fa-lg"></i></span>
+        <span>Top</span>
+    </a>
+
+</div>
+</body>
+</html>

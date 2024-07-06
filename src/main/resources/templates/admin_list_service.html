@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/homepage_user/images/icons/favicon.png"/>
+    <title> Dashboard | Dashboard</title>
+    <!-- Favicon -->
+    <!--    <link rel="shortcut icon" href="/static/admin_homepage/img/svg/Logo.svg" type="image/x-icon">-->
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/static/admin_homepage/css/style.min.css">
+
+    <link rel="stylesheet" href="/static/admin_homepage/css/style.css">
+</head>
+
+<body>
+<div class="layer"></div>
+<!-- ! Body -->
+<div class="page-flex">
+    <!-- ! Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-start">
+            <div class="sidebar-head">
+                <a th:href="@{home}" class="logo-wrapper" title="Home">
+                    <span class="sr-only">Home</span>
+                    <span class="icon logo" aria-hidden="true"></span>
+                    <div class="logo-text">
+                        <span class="logo-title">FPT Dorm</span>
+                        <span class="logo-subtitle">Dashboard</span>
+                    </div>
+
+                </a>
+                <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
+                    <span class="sr-only">Toggle menu</span>
+                    <span class="icon menu-toggle" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="sidebar-body">
+                <ul class="sidebar-body-menu">
+                    <li>
+                        <a class="active"><span class="icon home" aria-hidden="true"></span>Dashboard</a>
+                    </li>
+                    <li>
+                        <a class="show-cat-btn" th:href="@{admin/admin_list_student}">
+                            <span class="icon folder" aria-hidden="true"></span>Student
+                            <span class="category__btn transparent-btn" title="Open list">
+                            <span class="sr-only">Open list</span>
+                            <span class="icon arrow-down" aria-hidden="true"></span>
+                        </span>
+                        </a>
+                        <ul class="cat-sub-menu">
+                            <li>
+                                <a th:href="@{admin_list_student}">All Students</a>
+                            </li>
+                            <li>
+                                <a th:href="@{admin_add_student}">Add new student</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="show-cat-btn">
+                            <span class="icon folder" aria-hidden="true"></span>Room
+                            <span class="category__btn transparent-btn" title="Open list">
+                            <span class="sr-only">Open list</span>
+                            <span class="icon arrow-down" aria-hidden="true"></span>
+                        </span>
+                        </a>
+                        <ul class="cat-sub-menu">
+                            <li>
+                                <a th:href="@{/fpt-dorm/admin/admin_list_room}">All Rooms</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/fpt-dorm/admin/admin_add_new_room}">Add new room</a>
+                            </li>
+                            <li>
+                                <a th:href="@{admin_add_new_type_room}">Add new room type</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a class="show-cat-btn">
+                            <span class="icon folder" aria-hidden="true"></span>Employee
+                            <span class="category__btn transparent-btn" title="Open list">
+                            <span class="sr-only">Open list</span>
+                            <span class="icon arrow-down" aria-hidden="true"></span>
+                        </span>
+                        </a>
+                        <ul class="cat-sub-menu">
+                            <li>
+                                <a th:href="@{admin_list_employees}">All Employees</a>
+                            </li>
+                            <li>
+                                <a th:href="@{admin_add_employee}">Add new employee</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a th:href="@{admin/admin_payment_list}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Payment
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a th:href="@{admin/admin_chart}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Chart
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{admin_list_booking}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Booking requirement
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{admin_list_service}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Service requirement
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{admin/admin_list_feedback}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Feedback
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{admin/admin_list_complaint}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Complaint
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="sidebar-footer">
+            <a href="##" class="sidebar-user">
+            <span class="sidebar-user-img">
+                <picture><source srcset="/static/admin_homepage/img/avatar/avatar-illustrated-01.webp"
+                                 type="image/webp"><img
+                        src="/static/admin_homepage/img/avatar/avatar-illustrated-01.png" alt="User name"></picture>
+            </span>
+                <div class="sidebar-user-info">
+                    <span class="sidebar-user__title">AI</span>
+                    <span class="sidebar-user__subtitle">Support manager</span>
+                </div>
+            </a>
+        </div>
+    </aside>
+    <div class="main-wrapper">
+        <!-- ! Main nav -->
+        <nav class="main-nav--bg">
+            <div class="container main-nav">
+                <div class="main-nav-start">
+                </div>
+                <div class="main-nav-end">
+                    <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
+                        <span class="sr-only">Toggle menu</span>
+                        <span class="icon menu-toggle--gray" aria-hidden="true"></span>
+                    </button>
+                    <button class="theme-switcher gray-circle-btn" type="button" title="Switch theme">
+                        <span class="sr-only">Switch theme</span>
+                        <i class="sun-icon" data-feather="sun" aria-hidden="true"></i>
+                        <i class="moon-icon" data-feather="moon" aria-hidden="true"></i>
+                    </button>
+                    <div class="notification-wrapper">
+                        <button class="gray-circle-btn dropdown-btn" title="To messages" type="button">
+                            <span class="sr-only">To messages</span>
+                            <span class="icon notification active" aria-hidden="true"></span>
+                        </button>
+                        <ul class="users-item-dropdown notification-dropdown dropdown">
+                            <li>
+                                <a href="##">
+                                    <div class="notification-dropdown-icon info">
+                                        <i data-feather="check"></i>
+                                    </div>
+                                    <div class="notification-dropdown-text">
+                                        <span class="notification-dropdown__title">System just updated</span>
+                                        <span class="notification-dropdown__subtitle">The system has been successfully upgraded. Read more here.</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="##">
+                                    <div class="notification-dropdown-icon danger">
+                                        <i data-feather="info" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="notification-dropdown-text">
+                                        <span class="notification-dropdown__title">The cache is full!</span>
+                                        <span class="notification-dropdown__subtitle">Unnecessary caches take up a lot of memory space and interfere ...</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="##">
+                                    <div class="notification-dropdown-icon info">
+                                        <i data-feather="check" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="notification-dropdown-text">
+                                        <span class="notification-dropdown__title">New Subscriber here!</span>
+                                        <span class="notification-dropdown__subtitle">A new subscriber has subscribed.</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="link-to-page" href="##">Go to Notifications page</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-user-wrapper">
+                        <button href="##" class="nav-user-btn dropdown-btn" title="My profile" type="button">
+                            <span class="sr-only">My profile</span>
+                            <span class="nav-user-img">
+            <picture><source srcset="/static/admin_homepage/img/avatar/avatar-illustrated-02.webp"
+                             type="image/webp"><img src="/static/admin_homepage/img/avatar/avatar-illustrated-02.png"
+                                                    alt="User name"></picture>
+          </span>
+                        </button>
+                        <ul class="users-item-dropdown nav-user-dropdown dropdown">
+                            <li><a href="##">
+                                <li><a th:href="@{/fpt-dorm/profile(email=${email})}">Profile</a></li>
+                            </a>
+                            </li>
+                            <li><a class="danger" th:href="@{/fpt-dorm/logout}">
+                                <i data-feather="log-out" aria-hidden="true"></i>
+                                <span>Log out</span>
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- ! Main -->
+        <main class="main users chart-page" id="skip-target">
+            <div class="container">
+                <h2 class="main-title">Service Information</h2>
+                <!--                <div class="row" >-->
+                <!--                    <div class="col-lg-6">-->
+                <!--                        <form th:action="@{/fpt-dorm/admin/user-manager/search}" method="get" class="search-form">-->
+                <!--                            <input type="text" name="keyword" th:value="${keyword}" placeholder="Search..." class="search-box"/>-->
+                <!--                            <select name="category" class="search-dropdown">-->
+                <!--                                <option value="" th:text="'All Categories'" th:selected="${selectedCategory == null}"></option>-->
+                <!--                                <option value="ID" th:text="'ID'" th:selected="${selectedCategory == 'ID'}"></option>-->
+                <!--                                <option value="Name" th:text="'Name'" th:selected="${selectedCategory == 'Name'}"></option>-->
+                <!--                                <option value="Email" th:text="'Email'" th:selected="${selectedCategory == 'Email'}"></option>-->
+                <!--                                <option value="Phone" th:text="'Phone'" th:selected="${selectedCategory == 'Phone'}"></option>-->
+                <!--                            </select>-->
+                <!--                            <button class="btn btn-lg search-btn center-block" type="submit">Search</button>-->
+                <!--                        </form>-->
+                <!--                    </div>-->
+                <!--                    <div class="col-lg-3"></div>-->
+                <!--                    <div class="col-lg-3">-->
+                <!--                        <div style="text-align: right;">-->
+                <!--                            Sort by:-->
+                <!--                            <select name="sort" class="sort-dropdown">-->
+                <!--                                <option value="asc" th:text="'Ascending'"></option>-->
+                <!--                                <option value="desc" th:text="'Descending'"></option>-->
+                <!--                            </select>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                <br>-->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="canvas-wrapper">
+                            <div class="users-table table-wrapper">
+                                <table class="posts-table">
+                                    <thead>
+                                    <tr class="users-table-info">
+
+                                        <th style="width: 25%;">Service ID</th>
+
+                                        <th style="width : 30%;">Name</th>
+                                        <th style="width: 25%;">Price</th>
+
+                                        <th style="width: 5%;">Detail</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="service : ${serviceList}">
+
+                                        <td th:text="${service.serviceId}"></td>
+
+
+                                        <td th:text="${service.name}"></td>
+                                        <td>
+                                            <span th:text="${service.price} + ' VND'"></span>
+                                        </td>
+
+                                        <td>
+                                                <span class="p-relative">
+                                                    <button class="dropdown-btn transparent-btn" type="button" title="More info">
+                                                        <div class="sr-only">More info</div>
+                                                        <i data-feather="more-horizontal" aria-hidden="true"></i>
+                                                    </button>
+
+
+                                             <ul class="users-item-dropdown dropdown">
+<!--                                                        <li><a th:href="@{user-manager/edit(id=${user.userId})}">Edit</a></li>-->
+                                                        <li><a th:href="@{/fpt-dorm/admin/serviceDetail/{id}(id=${service.serviceId})}">View</a></li>
+                                                 <!--                                                        <li><a th:href="@{user-manager/delete(id=${user.userId})}">Delete</a></li>-->
+                                                    </ul>
+                                                </span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- ! Footer -->
+        <footer class="footer">
+            <div class="container footer--flex">
+            </div>
+        </footer>
+    </div>
+</div>
+<!-- Chart library -->
+<script src="/static/admin_homepage/plugins/chart.min.js"></script>
+<!-- Icons library -->
+<script src="/static/admin_homepage/plugins/feather.min.js"></script>
+<!-- Custom scripts -->
+<script src="/static/admin_homepage/js/script.js"></script>
+</body>
+
+</html>
