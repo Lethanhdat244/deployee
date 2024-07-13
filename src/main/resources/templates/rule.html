@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/homepage_user/images/icons/favicon.png"/>
+    <title>FPT Dormitory Rule</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/homepage_user/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/homepage_user/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom styles for this template -->
+    <link href="/static/homepage_user/css/style.css" rel="stylesheet">
+    <link href="/static/homepage_user/fonts/antonio-exotic/stylesheet.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/homepage_user/css/lightbox.min.css">
+    <link href="/static/homepage_user/css/responsive.css" rel="stylesheet">
+    <script src="/static/homepage_user/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/static/homepage_user/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/static/homepage_user/js/lightbox-plus-jquery.min.js" type="text/javascript"></script>
+    <script src="/static/homepage_user/js/instafeed.min.js" type="text/javascript"></script>
+    <script src="/static/homepage_user/js/custom.js" type="text/javascript"></script>
+
+</head>
+<body>
+<div id="page">
+    <!---header top---->
+    <div class="top-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+
+                </div>
+                <div class="col-md-6"><div class="social-grid">
+                    <ul class="list-unstyled text-right">
+                        <li><a><i class="fa fa-facebook"></i></a></li>
+                        <li><a><i class="fa fa-twitter"></i></a></li>
+                        <li><a><i class="fa fa-linkedin"></i></a></li>
+                        <li><a><i class="fa fa-instagram"></i></a></li>
+                    </ul>
+                </div></div>
+            </div>
+        </div>
+    </div>
+    <!--header--->
+    <header class="header-container">
+        <div class="container">
+            <div class="top-row">
+                <div class="row">
+                    <div class="col-md-2 col-sm-6 col-xs-6">
+                        <div id="logo">
+                            <a th:href="@{/fpt-dorm/home}"><span>FPT</span>Dorm</a>
+                            <!--                            <h1>Welcome, <span th:text="${email}">[email]</span></h1>-->
+                        </div>
+                    </div>
+                    <div class="col-sm-6 visible-sm">
+                        <div class="text-right">
+                            <div class="dropdown">
+                                <a href="#" class="book-now-btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><USER></USER> <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a th:href="@{/fpt-dorm/user/profile(email=${email})}">Profile</a></li>
+                                    <li><a th:href="@{/fpt-dorm/my-purchases}">My Purchases</a></li>
+                                    <li><a th:href="@{/fpt-dorm/change-password}">Change Password</a></li>
+                                    <li><a th:href="@{/fpt-dorm/logout}">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-12 col-xs-12 remove-padd">
+                        <nav class="navbar navbar-default">
+                            <div class="navbar-header page-scroll">
+                                <button data-target=".navbar-ex1-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div class="collapse navigation navbar-collapse navbar-ex1-collapse remove-space">
+                                <ul class="list-unstyled nav1 cl-effect-10">
+                                    <li><a data-hover="News" th:href="@{/fpt-dorm/user/news}"><span>News</span></a></li>
+                                    <li><a data-hover="Booking"
+                                           th:href="@{/fpt-dorm/user/booking}"><span>Booking</span></a></li>
+                                    <li><a data-hover="Availble beds"
+                                           th:href="@{/fpt-dorm/user/detail-dorm}"><span>Available beds</span></a>
+                                    </li>
+                                    <li><a data-hover="Usage service" th:href="@{/fpt-dorm/user/usage-service}"><span>Usage service</span></a>
+                                    </li>
+                                    <li><a data-hover="Payment"
+                                           th:href="@{/fpt-dorm/user/payment}"><span>Payment</span></a></li>
+                                    <li><a data-hover="Resident History"
+                                           th:href="@{/fpt-dorm/user/resident-history/list}"><span>Resident History</span></a>
+                                    </li>
+                                    <li><a data-hover="Request"
+                                           th:href="@{/fpt-dorm/user/my-request}"><span>Request</span></a>
+                                    </li>
+                                    <li><a data-hover="Dormitory rules"  class="active" ><span>Dormitory rules</span></a>
+                                    </li>
+                                    <li><a data-hover="FAQ"
+                                           th:href="@{/fpt-dorm/user/faq}"><span>FAQ</span></a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12 hidden-sm">
+                        <div class="text-right">
+                            <div class="dropdown">
+                                <a href="#" class="book-now-btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">USERS <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a th:href="@{/fpt-dorm/profile(email=${email})}">Profile</a></li>
+                                    <li><a th:href="@{/fpt-dorm/my-purchases}">My Purchases</a></li>
+                                    <li><a th:href="@{/fpt-dorm/change-password}">Change Password</a></li>
+                                    <li><a th:href="@{/fpt-dorm/logout}">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mainbox">
+        <h1>FPT Dormitory Rule</h1>
+        <img src="https://res.cloudinary.com/djuwlqgvb/image/upload/v1720849752/anh1_chydfr.png" alt="Image 1">
+        <img src="https://res.cloudinary.com/djuwlqgvb/image/upload/v1720849779/anh2_e1v5hg.png" alt="Image 2">
+        <img src="https://res.cloudinary.com/djuwlqgvb/image/upload/v1720849794/anh3_awlwf8.png" alt="Image 3">
+        <img src="https://res.cloudinary.com/djuwlqgvb/image/upload/v1720849784/anh4_s7yzj6.png" alt="Image 4">
+        <img src="https://res.cloudinary.com/djuwlqgvb/image/upload/v1720849793/anh5_xjossq.png" alt="Image 5">
+        <img src="https://res.cloudinary.com/djuwlqgvb/image/upload/v1720849795/anh6_nq6rip.png" alt="Image 6">
+        <img src="https://res.cloudinary.com/djuwlqgvb/image/upload/v1720849777/anh7_pcp0eo.png" alt="Image 7">
+        <img src="https://res.cloudinary.com/djuwlqgvb/image/upload/v1720849795/anh8_rugqjw.png" alt="Image 8">
+        <img src="https://res.cloudinary.com/djuwlqgvb/image/upload/v1720849791/anh9_af2owl.png" alt="Image 9">
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-12 width-set-50">
+                    <div class="footer-details">
+                        <h4>Get in touch</h4>
+                        <ul class="list-unstyled footer-contact-list">
+                            <li>
+                                <i class="fa fa-map-marker fa-lg"></i>
+                                <p>Khu Giáo dục và Đào tạo – Khu Công nghệ cao Hòa Lạc – Km29 Đại lộ Thăng Long, Thạch Thất, TP. HN</p>
+                            </li>
+                            <li>
+                                <i class="fa fa-phone fa-lg"></i>
+                                <p><a href="tel:+84-24-7300-1866"> +84-24-7300-1866</a></p>
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope-o fa-lg"></i>
+                                <p><a href="mailto:dormbooking@fpt.edu.vn"> dormbooking@fpt.edu.vn</a></p>
+                            </li>
+                        </ul>
+                        <div class="footer-social-icon">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        </div>
+                        <div class="input-group" id="subscribe">
+                            <input type="text" class="form-control subscribe-box" value="" name="subscribe" placeholder="EMAIL ID">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn subscribe-button"><i class="fa fa-paper-plane fa-lg"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 width-50 width-set-50">
+                    <div class="footer-details">
+                        <h4>Explore</h4>
+                        <ul class="list-unstyled footer-links">
+                            <li><a th:href="@{/fpt-dorm/home}">Home</a></li>
+                            <li><a th:href="@{/fpt-dorm/home/about}">About</a></li>
+                            <li><a th:href="@{/fpt-dorm/home/room}">Rooms</a></li>
+                            <li><a th:href="@{/fpt-dorm/home/gallery}">Gallery</a></li>
+                            <li><a th:href="@{/fpt-dorm/home/dinning}">Dining</a></li>
+                            <li><a th:href="@{/fpt-dorm/home/contact}">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="footer-details">
+                        <h4>Now On Instagram</h4>
+                        <div class="row">
+                            <div class="instagram-images">
+                                <div id="instafeed"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright">
+                &copy; 2024 All rights reserved. Designed by <a href="http://localhost:8080/fpt-dorm/home" target="_blank">SWP391</a>.
+            </div>
+
+        </div>
+    </footer>
+
+    <!--back to top--->
+    <a style="display: none;" href="javascript:void(0);" class="scrollTop back-to-top" id="back-to-top">
+        <span><i aria-hidden="true" class="fa fa-angle-up fa-lg"></i></span>
+        <span>Top</span>
+    </a>
+
+</div>
+<script>
+    function toggleVisibility(childId) {
+        var childElement = document.getElementById(childId);
+        if (childElement.classList.contains('hidden')) {
+            childElement.classList.remove('hidden');
+        } else {
+            childElement.classList.add('hidden');
+        }
+    }
+</script>
+</body>
+</html>
+

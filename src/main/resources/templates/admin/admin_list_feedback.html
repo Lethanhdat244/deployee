@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!doctype html>
+        <html lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        >
+        <head>
+        <title>System Manager</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Thư viện CSS -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Thêm Bootstrap CSS -->
+    <link rel="stylesheet" href="static/tai/css/style.css"> <!-- Đảm bảo rằng đường dẫn này là chính xác -->
+
+    <style>
+        /* CSS cho phần gạch chân */
+        body {
+            background-color: whitesmoke; /* General background color for the body */
+        }
+        .btn-detail {
+            text-decoration: underline;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .thead-primary {
+            background-color: #f2f2f2;
+        }
+        th, td {
+            border: 5px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <h2 class="heading-section">System Manager</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="text-center mb-4">Manage Feedbacks</h4>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead class="thead-primary">
+                        <tr>
+                            <th>Feedback ID</th>
+                            <th>User Name</th>
+                            <th>Booking ID</th>
+                            <th>Comment</th>
+                            <th>Rating</th>
+                            <th>CreatedAt</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+<!--                        <tr th:each="booking : ${bookings}">-->
+<!--                            <td th:text="${booking.bookingId}"></td>-->
+<!--                            <td th:text="${booking.roomId}"></td>-->
+<!--                            <td th:text="${booking.status}"></td>-->
+<!--                            <td th:text="${booking.capacity}"></td>-->
+<!--                            <td th:text="${booking.userId}"></td>-->
+<!--                            <td th:text="${booking.username}"></td>-->
+<!--                            <td th:text="${booking.checkInDate}"></td>-->
+<!--                            <td>-->
+<!--                                <a href="#" class="btn btn-info btn-detail" data-roomid="${booking.roomId}">Detail</a>-->
+<!--                                &lt;!&ndash; Sử dụng Thymeleaf để tạo URL &ndash;&gt;-->
+<!--                            </td>-->
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Thư viện JavaScript -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="static/tai/js/jquery.min.js"></script>
+<script src="static/tai/js/popper.js"></script>
+<script src="static/tai/js/bootstrap.min.js"></script>
+<script src="static/tai/js/main.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $(".btn-detail").click(function(e) {
+            e.preventDefault();
+            var roomId = $(this).data("roomid");
+            $.ajax({
+                url: "/detailroom/" + roomId,
+                type: "GET",
+                success: function(data) {
+                    // Xử lý dữ liệu trả về và hiển thị lên giao diện
+                    // Ví dụ: $('#detailInfo').html(data);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

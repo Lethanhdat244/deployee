@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail News | User</title>
+    <link rel="" href="/static/homepage_user/images/icons/favicon.png"/>
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/static/admin_homepage/css/style.min.css">
+    <style>
+        .news-card {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .news-card .card-header {
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .news-card .card-body {
+            padding: 20px;
+        }
+        .news-card .card-title {
+            margin-bottom: 10px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .news-card .card-text {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #333;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        .news-image {
+            width: 70%;
+            height: auto;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Main -->
+<main class="main users chart-page" id="skip-target">
+    <div class="container">
+        <button class="btn btn--back" onclick="window.history.back()"><i data-feather="arrow-left"></i>Back</button>
+        <br/><br/><br/>
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="news-card">
+                    <div class="card-header">News Details</div>
+                    <div class="card-body">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text" ><strong th:text="${newsUser.getTitle()}"></strong></p>
+                                <p class="card-text" th:text="${newsUser.createdAt}"></p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text" th:utext="${newsUser.content}"></p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <img class="news-image" th:src="${newsUser.imageUrl}" alt="News Image"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Chart library -->
+<script src="/static/admin_homepage/plugins/chart.min.js"></script>
+<!-- Icons library -->
+<script src="/static/admin_homepage/plugins/feather.min.js"></script>
+<!-- Custom scripts -->
+<script src="/static/admin_homepage/js/script.js"></script>
+</body>
+</html>

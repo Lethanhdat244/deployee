@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Detail</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center mt-5 mb-3">Booking Detail</h1>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Booking Information</h5>
+                    <p class="card-text"><strong>Booking ID:</strong> [[${bookingDetail.bookingId}]]</p>
+                    <p class="card-text"><strong>Check-in Date:</strong> [[${bookingDetail.checkInDate}]]</p>
+                    <p class="card-text"><strong>Check-out Date:</strong> [[${bookingDetail.checkOutDate}]]</p>
+                    <p class="card-text"><strong>Deposit:</strong> [[${bookingDetail.deposit}]]</p>
+                    <p class="card-text"><strong>Total Amount:</strong> [[${bookingDetail.totalAmount}]]</p>
+                    <p class="card-text"><strong>Status:</strong> [[${bookingDetail.status}]]</p>
+                    <h5 class="card-title">User Information</h5>
+                    <p class="card-text"><strong>User ID:</strong> [[${bookingDetail.userId}]]</p>
+                    <p class="card-text"><strong>Username:</strong> [[${bookingDetail.username}]]</p>
+                    <p class="card-text"><strong>Phone Number:</strong> [[${bookingDetail.phoneNumber}]]</p>
+                    <h5 class="card-title">Room Information</h5>
+                    <p class="card-text"><strong>Room ID:</strong> [[${bookingDetail.roomId}]]</p>
+                    <p class="card-text"><strong>Room Number:</strong> [[${bookingDetail.roomNumber}]]</p>
+                    <p class="card-text"><strong>Room Status:</strong> [[${bookingDetail.roomStatus}]]</p>
+                    <p class="card-text"><strong>Capacity:</strong> [[${bookingDetail.capacity}]]</p>
+                </div>
+            </div>
+            <div class="back-to-home">
+                <a href="/fpt-dorm/admin/list_booking" class="btn btn-primary">Back to Booking Information </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

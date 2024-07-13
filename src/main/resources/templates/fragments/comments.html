@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="commentsList">
+    <div th:each="comment, stat : ${comments}">
+        <p><strong th:text="${comment.getName()}">Name</strong> (<span th:text="${comment.getEmail()}">Email</span>)</p>
+        <p th:text="${comment.getCreated_at()}">Created At</p>
+        <p th:text="${comment.getMessage()}">Message</p>
+        <hr>
+    </div>
+    <div class="pagination-wrapper">
+        <ul class="pagination">
+            <li id="prev-page" th:if="${currentPage > 1}">
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${i == currentPage} ? 'active'">
+                <a href="#" class="page-link" th:data-page="${i}" th:text="${i}">1</a>
+            </li>
+            <li id="next-page" th:if="${currentPage < totalPages}">
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

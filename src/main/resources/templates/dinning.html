@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/homepage_user/images/icons/favicon.png"/>
+    <title>Dinning</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/homepage_user/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/homepage_user/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom styles for this template -->
+    <link href="/static/homepage_user/css/style.css" rel="stylesheet">
+    <link href="/static/homepage_user/fonts/antonio-exotic/stylesheet.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/homepage_user/css/lightbox.min.css">
+    <link href="/static/homepage_user/css/responsive.css" rel="stylesheet">
+    <script src="/static/homepage_user/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/static/homepage_user/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/static/homepage_user/js/lightbox-plus-jquery.min.js" type="text/javascript"></script>
+    <script src="/static/homepage_user/js/instafeed.min.js" type="text/javascript"></script>
+    <script src="/static/homepage_user/js/custom.js" type="text/javascript"></script>
+    <style>
+        .comment-section {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment-form h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .comment-form .form-control {
+            margin-bottom: 15px;
+            border-radius: 5px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment-form .submit-btn {
+            background: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .comment-form .submit-btn:hover {
+            background: #218838;
+        }
+        .comment {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .comment p {
+            margin: 0;
+        }
+        .comment strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .comment time {
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .pagination-wrapper {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .pagination li a {
+            background: #fff;
+            border: 1px solid #ddd;
+            color: #007bff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 0 5px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .pagination li a:hover {
+            background: #007bff;
+            color: #fff;
+        }
+        .pagination li.active a {
+            background: #007bff;
+            color: #fff;
+            border: 1px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+<div id="page">
+    <!---header top---->
+    <div class="top-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+
+                </div>
+                <div class="col-md-6"><div class="social-grid">
+                    <ul class="list-unstyled text-right">
+                        <li><a><i class="fa fa-facebook"></i></a></li>
+                        <li><a><i class="fa fa-twitter"></i></a></li>
+                        <li><a><i class="fa fa-linkedin"></i></a></li>
+                        <li><a><i class="fa fa-instagram"></i></a></li>
+                    </ul>
+                </div></div>
+            </div>
+        </div>
+    </div>
+    <!--header--->
+    <header class="header-container">
+        <div class="container">
+            <div class="top-row">
+                <div class="row">
+                    <div class="col-md-2 col-sm-6 col-xs-6">
+                        <div id="logo">
+                            <a th:href="@{/fpt-dorm/home}"><span>FPT</span>Dorm</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 visible-sm">
+                        <div class="text-right">
+                            <a href="/fpt-dorm/user/news" class="book-now-btn">Book Now</a>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-12 col-xs-12 remove-padd">
+                        <nav class="navbar navbar-default">
+                            <div class="navbar-header page-scroll">
+                                <button data-target=".navbar-ex1-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div class="collapse navigation navbar-collapse navbar-ex1-collapse remove-space">
+                                <ul class="list-unstyled nav1 cl-effect-10">
+                                    <li><a data-hover="Home" th:href="@{/fpt-dorm/home}"><span>Home</span></a></li>
+                                    <li><a data-hover="About" th:href="@{/fpt-dorm/home/about}"><span>About</span></a></li>
+                                    <li><a data-hover="Rooms" th:href="@{/fpt-dorm/home/room}"><span>Rooms</span></a></li>
+                                    <li><a data-hover="Gallery" th:href="@{/fpt-dorm/home/gallery}"><span>Gallery</span></a></li>
+                                    <li><a data-hover="Dinning" class="active"><span>Dinning</span></a></li>
+                                    <li><a data-hover="Contact Us" th:href="@{/fpt-dorm/home/contact}"><span>Contact Us</span></a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12 hidden-sm">
+                        <div class="text-right">
+                            <a href="/fpt-dorm/user/news" class="book-now-btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <!--end-->
+    <section class="image-head-wrapper" style="background-image: url('/static/homepage_user/images/banner2.jpg');">
+        <div class="inner-wrapper">
+            <h1>dinning</h1>
+        </div>
+    </section>
+    <div class="clearfix"></div>
+
+    <!--dining-->
+    <section class="blog">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <h2 class="blog-title-head">Dining at FPT Dorm</h2>
+                    <div class="blog-image-single margin-top-small">
+                        <img src="/static/homepage_user/images/dining.jpg" class="img-responsive" alt="Dining Image">
+                    </div>
+                    <p class="blog-desc">
+                        Welcome to the dining services at FPT Dorm! We are committed to providing our residents with a variety of delicious and nutritious meals that cater to different tastes and dietary needs. Our dining facilities are designed to offer a comfortable and inviting atmosphere where students can enjoy their meals, socialize, and relax.
+                    </p>
+                    <p class="blog-desc">
+                        <strong>Menu Highlights:</strong>
+                    <ul>
+                        <li>Daily Specials: Enjoy a different special meal each day, crafted by our talented chefs.</li>
+                        <li>Vegetarian Options: We offer a wide range of vegetarian dishes to ensure everyone has something delicious to eat.</li>
+                        <li>International Cuisine: Sample flavors from around the world with our rotating international menu.</li>
+                        <li>Healthy Choices: We provide a variety of healthy meal options to support your wellbeing.</li>
+                    </ul>
+                    </p>
+                    <p class="blog-desc">
+                        Our dining hall is open from 7:00 AM to 10:00 PM daily. We also offer meal plans that are flexible and can be customized to fit your schedule and preferences. Whether you need a quick bite between classes or a leisurely dinner with friends, our dining services have you covered.
+                    </p>
+
+                    <div class="clearfix"></div>
+                    <div class="single-bottom comment-form">
+                        <h3>Leave your Comment</h3>
+                        <form th:action="@{/fpt-dorm/home/dinning/comments}" method="post">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name"
+                                   required="">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                                   required="">
+                            <textarea class="form-control" id="message" name="message" placeholder="Message Here...."
+                                      required=""></textarea>
+                            <input type="submit" class="submit-btn" value="Send">
+                        </form>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br/><br/><br/><br/>
+                    <div class="comments">
+                        <h3>All Comments</h3><br/>
+                        <div class="comment" th:each="comment : ${comments}">
+                            <p><strong th:text="${comment.getName()}">Name</strong> (<span
+                                    th:text="${comment.getEmail()}">Email</span>)</p>
+                            <p th:text="${comment.getCreated_at()}">Created At</p>
+                            <p th:text="${comment.getMessage()}">Message</p>
+                        </div>
+                    </div>
+                    <div class="pagination-wrapper">
+                        <ul class="pagination">
+                            <li th:if="${currentPage > 1}">
+                                <a th:href="@{/fpt-dorm/home/dinning(page=${currentPage - 1})}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li th:each="i : ${#numbers.sequence(1, totalPages)}"
+                                th:classappend="${i == currentPage} ? 'active'">
+                                <a th:href="@{/fpt-dorm/home/dinning(page=${i})}" th:text="${i}">1</a>
+                            </li>
+                            <li th:if="${currentPage < totalPages}">
+                                <a th:href="@{/fpt-dorm/home/dinning(page=${currentPage + 1})}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <aside class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="blog-list">
+                        <h4>Categories</h4>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-caret-right"> </i>Dining Tips</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"> </i>Healthy Eating</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"> </i>Recipe Ideas</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"> </i>Food Reviews</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"> </i>Chef's Corner</a></li>
+                        </ul>
+
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="blog-list">
+                        <h4>Archives</h4>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-caret-right"> </i>July (15)</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"> </i>October (20)</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"> </i>November (8)</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"> </i>December (25)</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"> </i>August (9)</a></li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+    <!--end-->
+    <!---footer--->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-12 width-set-50">
+                    <div class="footer-details">
+                        <h4>Get in touch</h4>
+                        <ul class="list-unstyled footer-contact-list">
+                            <li>
+                                <i class="fa fa-map-marker fa-lg"></i>
+                                <p>Khu Giáo dục và Đào tạo – Khu Công nghệ cao Hòa Lạc – Km29 Đại lộ Thăng Long, Thạch Thất, TP. HN</p>
+                            </li>
+                            <li>
+                                <i class="fa fa-phone fa-lg"></i>
+                                <p><a href="tel:+842473001866"> (024) 7300.1866 / (024) 7300.5588</a></p>
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope-o fa-lg"></i>
+                                <p><a href="mailto:daihocfpt@fpt.edu.vn"> daihocfpt@fpt.edu.vn</a></p>
+                            </li>
+                        </ul>
+                        <div class="footer-social-icon">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        </div>
+                        <div class="input-group" id="subscribe">
+                            <input type="text" class="form-control subscribe-box" value="" name="subscribe" placeholder="EMAIL ID">
+                            <span class="input-group-btn">
+                                        <button type="button" class="btn subscribe-button"><i class="fa fa-paper-plane fa-lg"></i></button>
+                                    </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 width-50 width-set-50">
+                    <div class="footer-details">
+                        <h4>explore</h4>
+                        <ul class="list-unstyled footer-links">
+                            <li><a th:href="@{/fpt-dorm/home}">Home</a></li>
+                            <li><a th:href="@{/fpt-dorm/about}">About</a></li>
+                            <li><a th:href="@{/fpt-dorm/home/room}">Rooms</a></li>
+                            <li><a th:href="@{/fpt-dorm/home/gallery}">Gallery</a></li>
+                            <li  class="active"><a>Dinning</a></li>
+                            <li> <a th:href="@{/fpt-dorm/home/contact}">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="footer-details">
+                        <h4>Now On Instagram</h4>
+                        <div class="row">
+                            <div class="instagram-images">
+                                <div id="instafeed"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright">
+                &copy; 2024 All right reserved. Designed by <a href="http://localhost:8080/fpt-dorm/home" target="_blank">SWP391</a>
+            </div>
+
+        </div>
+    </footer>
+
+    <!--back to top--->
+    <a style="display: none;" href="javascript:void(0);" class="scrollTop back-to-top" id="back-to-top">
+        <span><i aria-hidden="true" class="fa fa-angle-up fa-lg"></i></span>
+        <span>Top</span>
+    </a>
+
+</div>
+
+<!--<script>-->
+<!--    $(document).ready(function() {-->
+<!--        function loadComments(page) {-->
+<!--            console.log("Loading comments for page: " + page);-->
+<!--            $.ajax({-->
+<!--                url: "/fpt-dorm/home/dinning/comments",-->
+<!--                type: "GET",-->
+<!--                data: { page: page },-->
+<!--                success: function(data) {-->
+<!--                    console.log("Comments loaded successfully for page: " + page);-->
+<!--                    console.log("AJAX response data:", data);-->
+
+<!--                    // Update #comments-wrapper with new comments-->
+<!--                    var newCommentsWrapper = $(data).find('#comments-wrapper').html();-->
+<!--                    $('#comments-wrapper').html(newCommentsWrapper);-->
+
+<!--                    // Update pagination-->
+<!--                    var newPagination = $(data).find('.pagination-wrapper').html();-->
+<!--                    $('.pagination-wrapper').html(newPagination);-->
+
+<!--                    console.log("Updated #comments-wrapper with new comments for page: " + page);-->
+<!--                    console.log("Updated .pagination-wrapper with new pagination for page: " + page);-->
+<!--                },-->
+<!--                error: function() {-->
+<!--                    console.error("Error loading comments for page: " + page);-->
+<!--                    alert("Error loading comments");-->
+<!--                }-->
+<!--            });-->
+<!--        }-->
+
+<!--        $(document).on('click', '.page-link', function(e) {-->
+<!--            e.preventDefault();-->
+<!--            var page = $(this).data('page');-->
+<!--            loadComments(page);-->
+<!--        });-->
+
+<!--        $(document).on('click', '#prev-page a', function(e) {-->
+<!--            e.preventDefault();-->
+<!--            var page = parseInt($('.pagination .active').text()) - 1;-->
+<!--            loadComments(page);-->
+<!--        });-->
+
+<!--        $(document).on('click', '#next-page a', function(e) {-->
+<!--            e.preventDefault();-->
+<!--            var page = parseInt($('.pagination .active').text()) + 1;-->
+<!--            loadComments(page);-->
+<!--        });-->
+
+<!--        // Load initial comments on page load-->
+<!--        loadComments(1);-->
+<!--    });-->
+<!--</script>-->
+
+
+
+</body>
+</html>

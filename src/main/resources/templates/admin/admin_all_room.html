@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> All Room | Admin</title>
+    <link rel="" href="/static/homepage_user/images/icons/favicon.png"/>
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/static/admin_homepage/css/style.min.css">
+
+    <link rel="stylesheet" href="/static/admin_homepage/css/style.css">
+    <script src="/static/homepage_user/js/jquery.min.js" type="text/javascript"></script>
+    <style>
+        .news-card {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-card .card-header {
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .news-card .card-body {
+            padding: 20px;
+        }
+
+        .news-card .card-title {
+            margin-bottom: 10px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .info {
+            color: #555555;
+        }
+
+        .danger {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .warning {
+            color: #ffb648;
+        }
+
+        .news-card .card-text {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #333;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+
+        .news-image {
+            width: 70%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 1em;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .form-group select,
+        select {
+            width: 30%;
+            padding: 0.5em;
+            margin-top: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group select option,
+        form select option {
+            padding: 0.5em;
+            margin-top: 0.5em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5em;
+            margin-top: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group button {
+            padding: 0.7em 1.5em;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        .success-message {
+            color: green;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            margin: 30px 0px;
+            border-radius: 7px;
+            font-weight: 700;
+        }
+
+        .primary {
+            background: #2f49d1;
+            color: white;
+        }
+
+        .pagination-wrapper {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .pagination {
+            display: inline-flex;
+            padding-left: 0;
+            list-style: none;
+            border-radius: 0.25rem;
+        }
+
+        .pagination .page-item {
+            display: inline;
+        }
+
+        .pagination .page-link {
+            position: relative;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin-left: -1px;
+            line-height: 1.25;
+            color: #007bff;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+
+        .pagination .page-item.active .page-link {
+            z-index: 1;
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="layer"></div>
+<!-- ! Body -->
+<div class="page-flex">
+    <!-- ! Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-start">
+            <div class="sidebar-head">
+                <a th:href="@{/fpt-dorm/admin/home}" class="logo-wrapper" title="Home">
+                    <span class="sr-only">Home</span>
+                    <span class="icon logo" aria-hidden="true"></span>
+                    <div class="logo-text">
+                        <span class="logo-title">FPT Dorm</span>
+                        <span class="logo-subtitle">ADMIN</span>
+                    </div>
+
+                </a>
+                <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
+                    <span class="sr-only">Toggle menu</span>
+                    <span class="icon menu-toggle" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="sidebar-body">
+                <ul class="sidebar-body-menu">
+                    <li>
+                        <a th:href="@{/fpt-dorm/admin/home}" ><span class="icon home"
+                                                                                  aria-hidden="true"></span>Dashboard</a>
+                    </li>
+                    <li>
+                        <a class="show-cat-btn">
+                            <span class="icon folder" aria-hidden="true"></span>Student
+                            <span class="category__btn transparent-btn" title="Open list">
+                            <span class="sr-only">Open list</span>
+                            <span class="icon arrow-down" aria-hidden="true"></span>
+                        </span>
+                        </a>
+                        <ul class="cat-sub-menu">
+                            <li>
+                                <a th:href="@{/fpt-dorm/admin/admin_list_student}">All Students</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/fpt-dorm/admin/admin_add_student}">Add new student</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a id="menu-room" class="show-cat-btn active">
+                            <span class="icon folder" aria-hidden="true"></span>Room
+                            <span class="category__btn transparent-btn" title="Open list">
+                                <span class="sr-only">Open list</span>
+                                <span class="icon arrow-down" aria-hidden="true"></span>
+                            </span>
+                        </a>
+                        <ul class="cat-sub-menu">
+                            <li>
+                                <a id="menu-all-room" class="" th:href="@{/fpt-dorm/admin/all-room}">All Rooms</a>
+                            </li>
+                            <li>
+                                <a>Add new room</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a class="show-cat-btn">
+                            <span class="icon folder" aria-hidden="true"></span>News
+                            <span class="category__btn transparent-btn" title="Open list">
+                            <span class="sr-only">Open list</span>
+                            <span class="icon arrow-down" aria-hidden="true"></span>
+                        </span>
+                        </a>
+                        <ul class="cat-sub-menu">
+                            <li>
+                                <a th:href="@{/fpt-dorm/admin/view-news}">View News</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/fpt-dorm/admin/add-news}">Add news</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="show-cat-btn">
+                            <span class="icon folder" aria-hidden="true"></span>Employee
+                            <span class="category__btn transparent-btn" title="Open list">
+                            <span class="sr-only">Open list</span>
+                            <span class="icon arrow-down" aria-hidden="true"></span>
+                        </span>
+                        </a>
+                        <ul class="cat-sub-menu">
+                            <li>
+                                <a th:href="@{/fpt-dorm/admin/admin_list_employees}">All Employees</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/fpt-dorm/admin/admin_add_employee}">Add new employee</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="show-cat-btn" href="#">
+                            <span class="icon folder" aria-hidden="true"></span>Payment
+                            <span class="category__btn transparent-btn" title="Open list">
+                            <span class="sr-only">Open list</span>
+                            <span class="icon arrow-down" aria-hidden="true"></span>
+                        </span>
+                        </a>
+                        <ul class="cat-sub-menu">
+                            <li>
+                                <a id="menu-all-payments" class="" th:href="@{/fpt-dorm/admin/admin_payment_list}">All
+                                    Payments</a>
+                            </li>
+                            <li>
+                                <a id="menu-payment-request" class="" th:href="@{/fpt-dorm/admin/admin_payment_request}">Payment Request</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/fpt-dorm/employee/usage-service}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Usage Service
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/fpt-dorm/admin/admin_Resident_History}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Resident History
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{admin/admin_chart}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Chart
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{admin/admin_list_feedback}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Feedback
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/fpt-dorm/admin/admin_list_complaint}">
+                            <span class="icon folder" aria-hidden="true"></span>
+                            Complaint
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="sidebar-footer">
+            <a href="#" class="sidebar-user">
+            <span class="sidebar-user-img">
+                <picture><source srcset="/admin_homepage/img/avatar/avatar-illustrated-01.webp" type="image/webp"><img
+                        src="/admin_homepage/img/avatar/avatar-illustrated-01.png" alt="User name"></picture>
+            </span>
+                <div class="sidebar-user-info">
+                    <span class="sidebar-user__title">AI</span>
+                    <span class="sidebar-user__subtitle">Support manager</span>
+                </div>
+            </a>
+        </div>
+    </aside>
+    <div class="main-wrapper">
+        <!-- ! Main nav -->
+        <nav class="main-nav--bg">
+            <div class="container main-nav">
+                <div class="main-nav-start">
+                </div>
+                <div class="main-nav-end">
+                    <button class="sidebar-toggle transparent-btn" title="Menu" type="button">
+                        <span class="sr-only">Toggle menu</span>
+                        <span class="icon menu-toggle--gray" aria-hidden="true"></span>
+                    </button>
+                    <button class="theme-switcher gray-circle-btn" type="button" title="Switch theme">
+                        <span class="sr-only">Switch theme</span>
+                        <i class="sun-icon" data-feather="sun" aria-hidden="true"></i>
+                        <i class="moon-icon" data-feather="moon" aria-hidden="true"></i>
+                    </button>
+                    <div class="notification-wrapper">
+                        <button class="gray-circle-btn dropdown-btn" title="To messages" type="button">
+                            <span class="sr-only">To messages</span>
+                            <span class="icon notification active" aria-hidden="true"></span>
+                        </button>
+                        <ul class="users-item-dropdown notification-dropdown dropdown">
+                            <li>
+                                <a href="##">
+                                    <div class="notification-dropdown-icon info">
+                                        <i data-feather="check"></i>
+                                    </div>
+                                    <div class="notification-dropdown-text">
+                                        <span class="notification-dropdown__title">System just updated</span>
+                                        <span class="notification-dropdown__subtitle">The system has been successfully upgraded. Read more here.</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="##">
+                                    <div class="notification-dropdown-icon danger">
+                                        <i data-feather="info" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="notification-dropdown-text">
+                                        <span class="notification-dropdown__title">The cache is full!</span>
+                                        <span class="notification-dropdown__subtitle">Unnecessary caches take up a lot of memory space and interfere ...</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="##">
+                                    <div class="notification-dropdown-icon info">
+                                        <i data-feather="check" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="notification-dropdown-text">
+                                        <span class="notification-dropdown__title">New Subscriber here!</span>
+                                        <span class="notification-dropdown__subtitle">A new subscriber has subscribed.</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="link-to-page" href="##">Go to Notifications page</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-user-wrapper">
+                        <button href="##" class="nav-user-btn dropdown-btn" title="My profile" type="button">
+                            <span class="sr-only">My profile</span>
+                            <span class="nav-user-img">
+            <picture><source srcset="/static/admin_homepage/img/avatar/avatar-illustrated-02.webp"
+                             type="image/webp"><img src="/static/admin_homepage/img/avatar/avatar-illustrated-02.png"
+                                                    alt="User name"></picture>
+          </span>
+                        </button>
+                        <ul class="users-item-dropdown nav-user-dropdown dropdown">
+                            <li><a th:href="@{/fpt-dorm/employee/profile(email=${email})}">Profile</a></li>
+                            <li><a th:href="@{/fpt-dorm/user/news}">Home User</a></li>
+                            <li><a class="danger" th:href="@{/fpt-dorm/logout}">
+                                <i data-feather="log-out" aria-hidden="true"></i>
+                                <span>Log out</span>
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </nav>
+        <!-- ! Main -->
+        <main class="main users chart-page" id="skip-target">
+            <div class="container">
+                <h2 class="main-title">All Rooms</h2>
+                <div class="canvas-wrapper" style="margin-bottom: 20px">
+                    <div class="row" >
+                        <div class="col-md-4">
+                            <label for="dorm">Dorm Gender</label>
+                            <select class="form-control" style="width: 50%"  id="gender" name="gender" onchange="updategenderAndDormName()">
+                                <option value="" disabled selected>-- Select Dorm Gender --</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="dorm">Dorm Name</label>
+                            <select class="form-control" style="width: 50%" id="dorm" name="dorm" onchange="updateFloorAndRooms()">
+                                <option value="" disabled selected>-- Select Dorm Name --</option>
+                            </select>
+                            <span id="dormError" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+
+                            <label for="floor">Floor</label>
+                            <select class="form-control" style="width: 50%" id="floor" name="floor" onchange="updateRoom(0)">
+                                <option value="" disabled selected>-- Select Floor --</option>
+                            </select>
+                            <span id="floorError" class="text-danger"></span>
+                            <span th:if="${error != null}" class="btn danger" th:text="${error}"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="canvas-wrapper">
+                            <div class="users-table table-wrapper">
+                                <table id="roomTable" class="posts-table">
+                                    <thead>
+                                    <tr class="users-table-info">
+                                        <th>Room Number</th>
+                                        <th>Capacity</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+
+                                <div class="pagination-wrapper">
+                                    <nav aria-label="Page navigation">
+                                        <ul id="paginationList" class="pagination">
+                                        </ul>
+                                    </nav>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offset-sm-2 col-sm-2 d-grid">
+                        <a class="btn secondary-default-btn" onclick="window.history.back()"
+                           role="button">Back</a>
+                    </div>
+
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+</div>
+<script>
+    function updategenderAndDormName() {
+        var gender = document.getElementById("gender").value;
+        fetch(`/fpt-dorm/admin/dorms-by-gender?gender=${gender}`)
+            .then(response => response.json())
+            .then(data => {
+                var dormSelect = document.getElementById("dorm");
+                dormSelect.innerHTML = '<option value="" disabled selected>-- Select Dorm Name --</option>';
+                data.forEach(dorm => {
+                    var option = document.createElement("option");
+                    option.value = dorm.dormId;
+                    option.textContent = dorm.dormName;
+                    dormSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+
+
+<script>
+    function updateFloorAndRooms() {
+        const dormId = document.getElementById("dorm").value;
+
+        $.get('/fpt-dorm/admin/all-room/floor', { dormId: dormId }, function (data) {
+            let floorSelect = $('#floor');
+            floorSelect.empty();
+            floorSelect.append('<option value="" disabled selected>-- Select Floor --</option>');
+
+            $.each(data, function (i, floor) {
+                floorSelect.append('<option value="' + floor.floorNumber + '">' + floor.floorNumber + '</option>');
+            });
+
+            clearRoomTableAndPagination();
+
+            if (data.length > 0) {
+                document.getElementById("floor").value = data[0].floorNumber;
+                updateRoom(0);
+            }
+        }).fail(function() {
+            $('#dormError').text('Failed to retrieve floor data. Please try again later.');
+        });
+    }
+    function updateRoom(page) {
+        const floorNumber = document.getElementById("floor").value;
+        const dormId = document.getElementById("dorm").value;
+
+        $.get('/fpt-dorm/admin/all-room/room-list', { dormId: dormId, floorNumber: floorNumber, page: page }, function (data) {
+            console.log("Data from server:", data);
+
+            let roomTable = $('#roomTable tbody');
+            roomTable.empty();
+
+            $.each(data.content, function (i, room) {
+                var row = $('<tr>\n' +
+                    '<td>' + room.roomNumber + '</td>\n' +
+                    '<td>' + room.capacity + '</td>\n' +
+                    '<td><button class="btn btn-primary detail-button" data-room-number="' + room.roomNumber + '">Detail</button></td>\n' +
+                    '</tr>');
+                roomTable.append(row);
+            });
+
+            roomTable.off('click', '.detail-button').on('click', '.detail-button', function() {
+                var roomNumber = $(this).data('room-number');
+                window.location.href = '/fpt-dorm/admin/room-detail?roomNumber=' + roomNumber;
+            });
+
+            updatePagination(data);
+        }).fail(function() {
+            $('#floorError').text('Failed to retrieve room data. Please try again later.');
+        });
+    }
+
+    function updatePagination(data) {
+        let paginationList = $('#paginationList');
+        paginationList.empty();
+
+        if (data.totalPages > 1) {
+            let first = '<li class="page-item ' + (data.number === 0 ? 'disabled' : '') + '">' +
+                '<a class="page-link" href="#" onclick="updateRoom(0); return false;" aria-label="First">' +
+                '<span aria-hidden="true">&laquo;</span>' +
+                '</a>' +
+                '</li>';
+            paginationList.append(first);
+
+            for (let i = 0; i < data.totalPages; i++) {
+                let active = (i === data.number) ? 'active' : '';
+                let pageItem = '<li class="page-item ' + active + '">' +
+                    '<a class="page-link" href="#" onclick="updateRoom(' + i + '); return false;">' + (i + 1) + '</a>' +
+                    '</li>';
+                paginationList.append(pageItem);
+            }
+
+            let last = '<li class="page-item ' + (data.number === data.totalPages - 1 ? 'disabled' : '') + '">' +
+                '<a class="page-link" href="#" onclick="updateRoom(' + (data.totalPages - 1) + '); return false;" aria-label="Last">' +
+                '<span aria-hidden="true">&raquo;</span>' +
+                '</a>' +
+                '</li>';
+            paginationList.append(last);
+        }
+    }
+
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const A = document.getElementById('menu-room');
+        const B = document.getElementById('menu-all-room');
+
+        A.addEventListener('click', function () {
+            if (A.classList.contains('active')) {
+                A.classList.remove('active');
+                B.classList.add('active');
+            } else {
+                A.classList.add('active');
+                B.classList.remove('active');
+            }
+        });
+    });
+</script>
+<script src="/static/admin_homepage/plugins/chart.min.js"></script>
+<!-- Icons library -->
+<script src="/static/admin_homepage/plugins/feather.min.js"></script>
+<!-- Custom scripts -->
+<script src="/static/admin_homepage/js/script.js"></script>
+
+</body>
+
+</html>

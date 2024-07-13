@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Detail</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center mt-5 mb-3">Room Detail</h2>
+    <div th:if="${message}" class="alert alert-success text-center">
+        [[${message}]]
+    </div>
+    <div class="m-3">
+        <div class="back-to-list">
+            <a th:href="@{/fpt-dorm/admin/list_room}" class="btn btn-primary">Back to List</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Room ID: <span th:text="${room.roomId}"></span></h4>
+            <p class="card-text">Room Number: <span th:text="${room.roomNumber}"></span></p>
+            <p class="card-text">Room Status: <span th:text="${room.roomStatus}"></span></p>
+            <p class="card-text">Capacity: <span th:text="${room.capacity}"></span></p>
+            <p class="card-text">Status: <span th:text="${room.status}"></span></p>
+            <p class="card-text">Created At: <span th:text="${room.createdAt}"></span></p>
+            <p class="card-text">Updated At: <span th:text="${room.updatedAt}"></span></p>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
